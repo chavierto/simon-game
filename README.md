@@ -4,19 +4,13 @@ A game in HTML, CSS and JS developed by Xavier Luján.
 
 ## Project description
 
----
-
 The game I'm developing is Simon. It's a single player game in which the user is tasked with remembering a sequence of colors that gets longer with each turn. The game continues as long as the player inputs the correct sequence. Once they make a mistake, the game ends and the score will be equal to the number of turns that the game lasted.
 
 ## Wire frames
 
----
-
 ![wire frame](https://user-images.githubusercontent.com/62493112/87177363-85e72100-c2a9-11ea-899d-1d9416e996ba.png)
 
 ## User stories
-
----
 
 #### MVP Goals
 
