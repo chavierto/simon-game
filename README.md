@@ -8,7 +8,7 @@ The game I'm developing is Simon. It's a single player game in which the user is
 
 ## Wire frames
 
-![wire frame](https://user-images.githubusercontent.com/62493112/87177363-85e72100-c2a9-11ea-899d-1d9416e996ba.png)
+<img src="https://user-images.githubusercontent.com/62493112/87177363-85e72100-c2a9-11ea-899d-1d9416e996ba.png" alt="wire frame" width="400"/>
 
 ## User stories
 
