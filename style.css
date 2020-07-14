@@ -10,20 +10,40 @@
 	border: 1px solid;
 	border-color: #444444;
 	margin: 3px;
+	transition: 0s 0.1s;
 }
 
+.box:active {
+	transition: 0s;
+}
 .box0 {
-	background-color: yellow;
+	background-color: #ffff0022;
 }
 
 .box1 {
-	background-color: blue;
+	background-color: #0000ff44;
 }
 
 .box2 {
-	background-color: green;
+	background-color: #00880044;
 }
 
 .box3 {
-	background-color: red;
+	background-color: #ff000044;
+}
+
+.box0:active {
+	background-color: #ffff00;
+}
+
+.box1:active {
+	background-color: #0000ff;
+}
+
+.box2:active {
+	background-color: #008800;
+}
+
+.box3:active {
+	background-color: #ff0000;
 }
