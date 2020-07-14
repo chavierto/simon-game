@@ -16,34 +16,45 @@
 .box:active {
 	transition: 0s;
 }
+
 .box0 {
-	background-color: #ffff0022;
-}
-
-.box1 {
-	background-color: #0000ff44;
-}
-
-.box2 {
-	background-color: #00880044;
-}
-
-.box3 {
-	background-color: #ff000044;
-}
-
-.box0:active {
 	background-color: #ffff00;
 }
 
-.box1:active {
+.box1 {
 	background-color: #0000ff;
 }
 
-.box2:active {
+.box2 {
 	background-color: #008800;
 }
 
-.box3:active {
+.box3 {
 	background-color: #ff0000;
+}
+
+
+.box0:active {
+	background-color: #ffff0022;
+	filter: brightness(200%);
+}
+
+.box1:active {
+	background-color: #0000ff44;
+	filter: brightness(200%);
+}
+
+.box2:active {
+	background-color: #00880044;
+	filter: brightness(200%);
+}
+
+.box3:active {
+	background-color: #ff000044;
+	filter: brightness(200%);
+}
+
+
+effect {
+	filter: brightness(200%);
 }

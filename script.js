@@ -15,6 +15,8 @@ const boardEl = document.querySelector('.board');
 boardEl.addEventListener('click', buttonClick);
 function buttonClick(event) {
 	userMemory.push(event.target.id);
+	checkGame();
+	turn++;
 	console.log(event.target.id);
 }
 
@@ -22,8 +24,18 @@ function buttonClick(event) {
 const buttonEl = document.querySelector('.button');
 buttonEl.addEventListener('click', startGame);
 function startGame() {
-    randomSequence();
-    
-	console.log(gameMemory[turn]);
-	turn++;
+	gameMemory.length = 0;
+	userMemory.length = 0;
+	randomSequence();
+	document.getElementById('gameMemory.[${turn}]');
+	console.log(gameMemory);
+}
+
+//Declare checkGame function
+function checkGame() {
+	if (userMemory[turn] == gameMemory[turn]) {
+		console.log('Nice! keep going...');
+	} else {
+		console.log('Game over!');
+	}
 }
