@@ -13,10 +13,6 @@
 	transition: 0s 0.1s;
 }
 
-.box:active {
-	transition: 0s;
-}
-
 .box0 {
 	background-color: #ffff00;
 }
@@ -33,28 +29,18 @@
 	background-color: #ff0000;
 }
 
-
 .box0:active {
 	background-color: #ffff0022;
-	filter: brightness(200%);
 }
 
 .box1:active {
 	background-color: #0000ff44;
-	filter: brightness(200%);
 }
 
 .box2:active {
 	background-color: #00880044;
-	filter: brightness(200%);
 }
 
 .box3:active {
 	background-color: #ff000044;
-	filter: brightness(200%);
-}
-
-
-effect {
-	filter: brightness(200%);
 }
