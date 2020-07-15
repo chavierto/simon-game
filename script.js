@@ -139,7 +139,9 @@ function checkGame() {
 	// 	alert('Game over!');
 	// }
 	if (turn === 3) {
-		alert('You Won!');
+		setTimeout(() => {
+			alert('You won!');
+		}, 500);
 	}
 }
 
