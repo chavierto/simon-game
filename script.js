@@ -1,15 +1,31 @@
-//Declare gameMemory, userMemory, turn counter & output counter
+/*
+WHAT DO I NEED?
++four colored boxes
++A random array -> gameMemory
+-A way to display the array in instances with increasing items
+-+A way to blink the buttons matching the instances used to display the array -> ***Blink function. can be called by clicking the button on user turn, or by showing the sequence of displaySequence
++A record of the guesses the user is making
++The ability to check if the guesses are true or false
++The ability to display if the guess was false
+-If the guess is true, he ability to continue checking guesses until the final item in the turn.
++A way to know what turn it is
+*/
+
+//BEGIN CODE HERE
+
+//Declare gameMemory, userMemory, turn counter & displaySequence counter
+//Turn counts the level, userClick counts the clicks within a level
 const gameMemory = [];
-const userMemory = [];
+let userMemory = [];
 let turn = 0;
-let blinking = 1;
+let userClick = 0;
 
 const counterEl = document.querySelector('.counter');
 
-//Declare 20 item random requence
+//Declare a 20 item random requence
 function randomSequence() {
-	for (let i = 0; i < 20; i++) {
-		gameMemory.push(Math.floor(Math.random() * 4));
+	for (let i = 0; i < 3; i++) {
+		gameMemory.push(String(Math.floor(Math.random() * 4)));
 	}
 }
 
@@ -18,10 +34,75 @@ const boardEl = document.querySelector('.board');
 boardEl.addEventListener('click', buttonClick);
 function buttonClick(event) {
 	userMemory.push(event.target.id);
-	console.log('click test', userMemory);
-	// if (userMemory.length - 1 == turn) {
-	checkGame();
-	// }
+	console.log(userMemory);
+	if (event.target.id === '0') {
+		yellowBlink();
+	}
+	if (event.target.id === '1') {
+		blueBlink();
+	}
+	if (event.target.id === '2') {
+		greenBlink();
+	}
+	if (event.target.id === '3') {
+		redBlink();
+	}
+	userClick++;
+	if (userClick === turn + 1) {
+		console.log('user memory', userMemory);
+		console.log('game memory', gameMemory);
+		checkGame();
+	}
+}
+
+//Target colored boxes individually to be able to set up blinking and run displaySequence
+
+const yellow = document.getElementById('0');
+const blue = document.getElementById('1');
+const green = document.getElementById('2');
+const red = document.getElementById('3');
+
+//Define blinking of colors
+function yellowBlink() {
+	yellow.style.filter = 'brightness(400%)';
+	setTimeout(() => {
+		yellow.style.filter = 'none';
+	}, 200);
+}
+
+function blueBlink() {
+	blue.style.filter = 'brightness(400%)';
+	setTimeout(() => {
+		blue.style.filter = 'none';
+	}, 200);
+}
+
+function greenBlink() {
+	green.style.filter = 'brightness(400%)';
+	setTimeout(() => {
+		green.style.filter = 'none';
+	}, 200);
+}
+
+function redBlink() {
+	red.style.filter = 'brightness(400%)';
+	setTimeout(() => {
+		red.style.filter = 'none';
+	}, 200);
+}
+
+//blink() function useful for calling blinks on displaySequence, passing through the value of the array to blink and it calls on the appropriate colored blink
+
+function blink(value) {
+	if (value === '0') {
+		yellowBlink();
+	} else if (value === '1') {
+		blueBlink();
+	} else if (value === '2') {
+		greenBlink();
+	} else if (value === '3') {
+		redBlink();
+	}
 }
 
 //Target start game button. Reset gameMemory, userMemory & turn counter
@@ -30,43 +111,43 @@ buttonEl.addEventListener('click', startGame);
 function startGame() {
 	gameMemory.length = 0;
 	userMemory.length = 0;
+	userClick = 0;
+	turn = 0;
+	counterEl.innerHTML = `Round: ${turn + 1}`;
 	randomSequence();
+	repeatSequence();
 	console.clear();
-	repeatSequence(blinking);
-	console.log(gameMemory);
+	// console.log(gameMemory);
 }
 
 //Declare checkGame function
 function checkGame() {
-	if (userMemory[userMemory.length - 1] == gameMemory[turn]) {
-		blinking++;
-		console.log('Nice! keep going...');
-		repeatSequence(blinking);
-	} else {
-		console.log('Game over!');
+	console.log(userMemory, gameMemory.slice(0, turn + 1));
+	const gameMemoryCurrent = gameMemory.slice(0, turn + 1);
+	if (userMemory.toString() === gameMemoryCurrent.toString()) {
+		// setTimeout(() => {
+		// 	alert('You won!');
+		// }, 500);
+		counterEl.innerHTML = `Round: ${turn + 1}`;
+		turn++;
+		console.log('Ok! Keep going...');
+		repeatSequence();
+		userMemory = [];
+		userClick = 0;
 	}
-	turn++;
-	(counterEl.innerHTML = 'Turn:'), turn;
-	userMemory = [];
+	// if (userMemory.toString() !== gameMemoryCurrent.toString()) {
+	// 	alert('Game over!');
+	// }
+	if (turn === 3) {
+		alert('You Won!');
+	}
 }
 
 //Repeat sequence for user
-function lightUp(index) {
-	return new Promise((resolve, reject) => {
-		document.getElementById(`${gameMemory[index]}`).style.filter =
-			'brightness(300%)';
-		console.log('light up', index);
+function repeatSequence() {
+	for (let i = 0; i <= turn; i++) {
 		setTimeout(() => {
-			document.getElementById(`${gameMemory[index]}`).style.filter = 'none';
-		}, 500);
-		setTimeout(() => {
-			resolve();
-		}, 500);
-	});
-}
-
-async function repeatSequence(index) {
-	for (let i = 0; i < index; i++) {
-		await lightUp(i);
+			blink(gameMemory[i]);
+		}, (i + 1) * 400);
 	}
 }
