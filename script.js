@@ -24,7 +24,7 @@ const counterEl = document.querySelector('.counter');
 
 //Declare a 20 item random requence
 function randomSequence() {
-	for (let i = 0; i < 3; i++) {
+	for (let i = 0; i < 20; i++) {
 		gameMemory.push(String(Math.floor(Math.random() * 4)));
 	}
 }
@@ -122,23 +122,18 @@ function startGame() {
 
 //Declare checkGame function
 function checkGame() {
-	console.log(userMemory, gameMemory.slice(0, turn + 1));
 	const gameMemoryCurrent = gameMemory.slice(0, turn + 1);
 	if (userMemory.toString() === gameMemoryCurrent.toString()) {
-		// setTimeout(() => {
-		// 	alert('You won!');
-		// }, 500);
-		counterEl.innerHTML = `Round: ${turn + 1}`;
 		turn++;
-		console.log('Ok! Keep going...');
+		counterEl.innerHTML = `Round: ${turn + 1}`;
 		repeatSequence();
 		userMemory = [];
 		userClick = 0;
 	}
-	// if (userMemory.toString() !== gameMemoryCurrent.toString()) {
-	// 	alert('Game over!');
-	// }
-	if (turn === 3) {
+	if (userMemory.toString() !== gameMemoryCurrent.toString()) {
+		console.log('Game over!');
+	}
+	if (turn === 20) {
 		setTimeout(() => {
 			alert('You won!');
 		}, 500);
