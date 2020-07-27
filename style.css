@@ -1,3 +1,10 @@
+/* 
+In general, I'd not recommend using tag selectors (e.g., body) to target elements 
+for styling purposes because tag selectors are not specific enough and can easily 
+get overridden. Just stick with class selectors instead. 
+Here are some reasons why: https://frontstuff.io/you-need-to-stop-targeting-tags-in-css
+*/
+
 body {
 	text-align: center;
 }
