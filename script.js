@@ -24,35 +24,35 @@ const counterEl = document.querySelector('.counter');
 
 //Declare a 20 item random requence
 function randomSequence() {
-	for (let i = 0; i < 20; i++) {
-		gameMemory.push(String(Math.floor(Math.random() * 4)));
-	}
+  for (let i = 0; i < 20; i++) {
+    gameMemory.push(String(Math.floor(Math.random() * 4)));
+  }
 }
 
 //Target board and colored squares, declare buttonClick()
 const boardEl = document.querySelector('.board');
 boardEl.addEventListener('click', buttonClick);
 function buttonClick(event) {
-	userMemory.push(event.target.id);
-	console.log(userMemory);
-	if (event.target.id === '0') {
-		yellowBlink();
-	}
-	if (event.target.id === '1') {
-		blueBlink();
-	}
-	if (event.target.id === '2') {
-		greenBlink();
-	}
-	if (event.target.id === '3') {
-		redBlink();
-	}
-	userClick++;
-	if (userClick === turn + 1) {
-		console.log('user memory', userMemory);
-		console.log('game memory', gameMemory);
-		checkGame();
-	}
+  userMemory.push(event.target.id);
+  console.log(userMemory);
+  if (event.target.id === '0') {
+    colorBlink(yellow);
+  }
+  if (event.target.id === '1') {
+    colorBlink(blue);
+  }
+  if (event.target.id === '2') {
+    colorBlink(green);
+  }
+  if (event.target.id === '3') {
+    colorBlink(red);
+  }
+  userClick++;
+  if (userClick === turn + 1) {
+    console.log('user memory', userMemory);
+    console.log('game memory', gameMemory);
+    checkGame();
+  }
 }
 
 //Target colored boxes individually to be able to set up blinking and run displaySequence
@@ -63,88 +63,66 @@ const green = document.getElementById('2');
 const red = document.getElementById('3');
 
 //Define blinking of colors
-function yellowBlink() {
-	yellow.style.filter = 'brightness(400%)';
-	setTimeout(() => {
-		yellow.style.filter = 'none';
-	}, 200);
+function colorBlink(button) {
+  button.style.filter = 'brightness(400%)';
+  setTimeout(() => {
+    button.style.filter = 'none';
+  }, 200);
 }
-
-function blueBlink() {
-	blue.style.filter = 'brightness(400%)';
-	setTimeout(() => {
-		blue.style.filter = 'none';
-	}, 200);
-}
-
-function greenBlink() {
-	green.style.filter = 'brightness(400%)';
-	setTimeout(() => {
-		green.style.filter = 'none';
-	}, 200);
-}
-
-function redBlink() {
-	red.style.filter = 'brightness(400%)';
-	setTimeout(() => {
-		red.style.filter = 'none';
-	}, 200);
-}
-
 //blink() function useful for calling blinks on displaySequence, passing through the value of the array to blink and it calls on the appropriate colored blink
-
 function blink(value) {
-	if (value === '0') {
-		yellowBlink();
-	} else if (value === '1') {
-		blueBlink();
-	} else if (value === '2') {
-		greenBlink();
-	} else if (value === '3') {
-		redBlink();
-	}
+  if (value === '0') {
+    colorBlink(yellow);
+  } else if (value === '1') {
+    colorBlink(blue);
+  } else if (value === '2') {
+    colorBlink(green);
+  } else if (value === '3') {
+    colorBlink(red);
+  }
 }
 
 //Target start game button. Reset gameMemory, userMemory & turn counter
 const buttonEl = document.querySelector('.button');
 buttonEl.addEventListener('click', startGame);
 function startGame() {
-	gameMemory.length = 0;
-	userMemory.length = 0;
-	userClick = 0;
-	turn = 0;
-	counterEl.innerHTML = `Round: ${turn + 1}`;
-	randomSequence();
-	repeatSequence();
-	console.clear();
-	// console.log(gameMemory);
+  gameMemory.length = 0;
+  userMemory.length = 0;
+  userClick = 0;
+  turn = 0;
+  counterEl.innerHTML = `Round: ${turn + 1}`;
+  randomSequence();
+  repeatSequence();
 }
 
 //Declare checkGame function
 function checkGame() {
-	const gameMemoryCurrent = gameMemory.slice(0, turn + 1);
-	if (userMemory.toString() === gameMemoryCurrent.toString()) {
-		turn++;
-		counterEl.innerHTML = `Round: ${turn + 1}`;
-		repeatSequence();
-		userMemory = [];
-		userClick = 0;
-	}
-	if (userMemory.toString() !== gameMemoryCurrent.toString()) {
-		console.log('Game over!');
-	}
-	if (turn === 20) {
-		setTimeout(() => {
-			alert('You won!');
-		}, 500);
-	}
+  const gameMemoryCurrent = gameMemory.slice(0, turn + 1);
+  if (userMemory.toString() === gameMemoryCurrent.toString()) {
+    turn++;
+    counterEl.innerHTML = `Round: ${turn + 1}`;
+    repeatSequence();
+    userMemory = [];
+    userClick = 0;
+  }
+  if (userMemory.toString() !== gameMemoryCurrent.toString()) {
+    // Hou comment: instead of logging "Game Over to the console", consider displaying the message in a modal
+    console.log('Game over!');
+  }
+  if (turn === 20) {
+    setTimeout(() => {
+      // Hou comment: for a better user experience, consider displaying a well-designed modal instead of alerting a message
+      alert('You won!');
+    }, 500);
+  }
 }
 
 //Repeat sequence for user
 function repeatSequence() {
-	for (let i = 0; i <= turn; i++) {
-		setTimeout(() => {
-			blink(gameMemory[i]);
-		}, (i + 1) * 400);
-	}
+  for (let i = 0; i <= turn; i++) {
+    // Hou comment: great job figuring out this part of the logic!
+    setTimeout(() => {
+      blink(gameMemory[i]);
+    }, (i + 1) * 400);
+  }
 }
